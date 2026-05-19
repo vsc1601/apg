@@ -1,0 +1,2603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APG Bali Wellness - Minuman Kesehatan Tinggi Serat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============== ROOT VARIABLES ============== */
+  :root {
+    --gold-50:  #FFF8E7;
+    --gold-100: #FBEFC6;
+    --gold-200: #F5DF8E;
+    --gold-300: #EFCB5D;
+    --gold-400: #E5B637;
+    --gold-500: #D4A017;
+    --gold-600: #B8860B;
+    --gold-700: #946708;
+    --gold-800: #6F4D06;
+    --gold-900: #4A3304;
+
+    --rose-50:  #FFF1F4;
+    --rose-100: #FFE0E7;
+    --rose-200: #FFC2D0;
+    --rose-300: #FF95AC;
+    --rose-400: #F5688B;
+    --rose-500: #E91E63;
+    --rose-600: #C2185B;
+    --rose-700: #9C1551;
+    --rose-800: #7A1042;
+
+    --bg: #FFFBF2;
+    --bg-soft: #FFF6E3;
+    --surface: #FFFFFF;
+    --surface-2: #FFF8E7;
+    --text: #2A1F0A;
+    --text-soft: #6B5A30;
+    --text-muted: #9C8758;
+    --border: #EFCB5D;
+    --border-soft: #F5DF8E;
+    --shadow-gold: 0 8px 30px rgba(184, 134, 11, 0.15);
+    --shadow-rose: 0 8px 30px rgba(233, 30, 99, 0.12);
+
+    --grad-gold: linear-gradient(135deg, #FBEFC6 0%, #D4A017 50%, #B8860B 100%);
+    --grad-rose-gold: linear-gradient(135deg, #FFC2D0 0%, #E5B637 50%, #B8860B 100%);
+    --grad-luxe: linear-gradient(135deg, #E91E63 0%, #D4A017 60%, #B8860B 100%);
+    --grad-bali: linear-gradient(135deg, #FFF1F4 0%, #FFF8E7 50%, #FBEFC6 100%);
+  }
+
+  [data-theme="dark"] {
+    --bg: #1A1208;
+    --bg-soft: #251A0E;
+    --surface: #2D1F10;
+    --surface-2: #3B2A15;
+    --text: #FBEFC6;
+    --text-soft: #E5B637;
+    --text-muted: #B8860B;
+    --border: #6F4D06;
+    --border-soft: #4A3304;
+    --shadow-gold: 0 8px 30px rgba(0, 0, 0, 0.5);
+    --shadow-rose: 0 8px 30px rgba(233, 30, 99, 0.25);
+    --grad-bali: linear-gradient(135deg, #251A0E 0%, #2D1F10 50%, #3B2A15 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { overflow-x: hidden; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+    position: relative;
+  }
+
+  /* Bali pattern overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(212, 160, 23, 0.06) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(233, 30, 99, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .display-font { font-family: 'Cormorant Garamond', serif; }
+
+  /* ============== LOGIN SCREEN ============== */
+  .screen { display: none; min-height: 100vh; position: relative; z-index: 1; }
+  .screen.active { display: block; }
+
+  #loginScreen {
+    background: var(--grad-bali);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  #loginScreen.active { display: flex; }
+
+  /* Bali decorative elements */
+  .bali-ornament {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .bali-ornament.top-left { top: -40px; left: -40px; width: 200px; height: 200px; }
+  .bali-ornament.bottom-right { bottom: -40px; right: -40px; width: 220px; height: 220px; }
+
+  .login-card {
+    background: var(--surface);
+    border-radius: 28px;
+    padding: 36px 28px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(184, 134, 11, 0.25);
+    border: 1px solid var(--border-soft);
+    position: relative;
+    z-index: 2;
+  }
+
+  .login-logo {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+    background: var(--grad-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+    position: relative;
+  }
+  .login-logo::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-400);
+    opacity: 0.5;
+  }
+
+  .login-card h1 {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 700;
+    background: var(--grad-luxe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+  .login-card .subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .login-card .tagline {
+    text-align: center;
+    color: var(--text-soft);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .form-group label .req { color: var(--rose-500); }
+  .form-input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 12px;
+    font-size: 15px;
+    background: var(--bg-soft);
+    color: var(--text);
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--gold-500);
+    background: var(--surface);
+    box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.12);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--grad-gold);
+    color: white;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(184, 134, 11, 0.4); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-rose { background: linear-gradient(135deg, var(--rose-400), var(--rose-600)); color: white; box-shadow: var(--shadow-rose); }
+  .btn-outline { background: transparent; border: 1.5px solid var(--gold-500); color: var(--gold-700); }
+  .btn-ghost { background: var(--surface-2); color: var(--text); }
+  .btn-sm { padding: 8px 14px; font-size: 13px; }
+  .btn-block { width: 100%; }
+
+  .login-foot {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .login-foot a { color: var(--gold-700); font-weight: 600; }
+
+  /* ============== APP LAYOUT ============== */
+  #appScreen {
+    padding-bottom: 90px;
+    min-height: 100vh;
+  }
+
+  .app-header {
+    background: var(--grad-luxe);
+    color: white;
+    padding: 22px 18px 60px;
+    border-radius: 0 0 28px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .app-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,0.15) 0%, transparent 30%),
+      radial-gradient(circle at 80% 100%, rgba(255, 194, 208, 0.2) 0%, transparent 40%);
+  }
+  .app-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 14' preserveAspectRatio='none'><path d='M0 0 L5 8 L10 0 L15 8 L20 0 L25 8 L30 0 L35 8 L40 0 L45 8 L50 0 L55 8 L60 0 L65 8 L70 0 L75 8 L80 0 L85 8 L90 0 L95 8 L100 0 L100 14 L0 14 Z' fill='%23FFFBF2'/></svg>") repeat-x;
+    background-size: 30px 14px;
+  }
+  [data-theme="dark"] .app-header::after { filter: brightness(0.15); }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
+  }
+  .header-greet { font-size: 13px; opacity: 0.9; }
+  .header-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .header-icons { display: flex; gap: 10px; }
+  .icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { background: rgba(255,255,255,0.3); }
+  .icon-btn .badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--gold-300);
+    color: var(--text);
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+  }
+  .page-sub {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-top: 4px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .content { padding: 18px; margin-top: -40px; position: relative; z-index: 3; }
+  .page { display: none; animation: fadeUp 0.4s ease; }
+  .page.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============== CARDS ============== */
+  .card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: var(--shadow-gold);
+    border: 1px solid var(--border-soft);
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  /* ============== DASHBOARD ============== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 14px;
+    border: 1px solid var(--border-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad-gold);
+  }
+  .stat-card.rose::before { background: var(--grad-luxe); }
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--gold-50);
+    color: var(--gold-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  [data-theme="dark"] .stat-icon { background: var(--surface-2); }
+  .stat-card.rose .stat-icon { background: var(--rose-50); color: var(--rose-600); }
+  [data-theme="dark"] .stat-card.rose .stat-icon { background: var(--surface-2); color: var(--rose-300); }
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Birthday reminder */
+  .birthday-card {
+    background: linear-gradient(135deg, rgba(255, 194, 208, 0.4), rgba(251, 239, 198, 0.6));
+    border: 1.5px solid var(--gold-300);
+  }
+  [data-theme="dark"] .birthday-card {
+    background: linear-gradient(135deg, rgba(122, 16, 66, 0.3), rgba(74, 51, 4, 0.4));
+  }
+  .birthday-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--surface);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-soft);
+  }
+  .birthday-item:last-child { margin-bottom: 0; }
+  .birthday-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--grad-luxe);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+  }
+  .birthday-info { flex: 1; min-width: 0; }
+  .birthday-name { font-weight: 600; font-size: 14px; color: var(--text); }
+  .birthday-date { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; margin-top: 2px;}
+
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .qa-item {
+    text-align: center;
+    cursor: pointer;
+    padding: 12px 6px;
+    border-radius: 14px;
+    transition: all 0.2s;
+  }
+  .qa-item:hover { background: var(--bg-soft); }
+  .qa-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 6px;
+    background: var(--grad-gold);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 6px 16px rgba(184, 134, 11, 0.25);
+  }
+  .qa-label { font-size: 11px; font-weight: 600; color: var(--text-soft); }
+
+  /* ============== PRESENTATION ============== */
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #2A1F0A, #6F4D06);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid var(--gold-400);
+    margin-bottom: 16px;
+  }
+  .video-wrapper iframe, .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .video-poster {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(42, 31, 10, 0.7), rgba(184, 134, 11, 0.7));
+    cursor: pointer;
+    flex-direction: column;
+    color: white;
+    z-index: 2;
+    transition: opacity 0.3s;
+  }
+  .video-poster.hidden { display: none; }
+  .play-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+    50% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
+  }
+  .play-btn svg { color: var(--gold-700); margin-left: 4px; }
+  .video-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; }
+  .video-sub { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+
+  .ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .ingredient {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: var(--bg-soft);
+    border-radius: 12px;
+    border: 1px solid var(--border-soft);
+  }
+  .ingredient-icon { font-size: 24px; }
+  .ingredient-name { font-size: 13px; font-weight: 600; }
+  .ingredient-desc { font-size: 10px; color: var(--text-muted); }
+
+  .benefit-list { list-style: none; }
+  .benefit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-soft);
+    font-size: 14px;
+  }
+  .benefit-list li:last-child { border-bottom: none; }
+  .benefit-check {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--grad-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: white;
+    margin-top: 1px;
+  }
+
+  /* ============== MEMBER / BINARY TREE ============== */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    background: var(--bg-soft);
+    padding: 5px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-soft);
+    overflow-x: auto;
+  }
+  .tab {
+    flex: 1;
+    min-width: max-content;
+    padding: 9px 12px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab.active {
+    background: var(--grad-gold);
+    color: white;
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+  }
+
+  .tree-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 10px 10px;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--border-soft);
+    -webkit-overflow-scrolling: touch;
+  }
+  .tree-canvas {
+    min-width: 720px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .tree-level {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 38px;
+    position: relative;
+    flex-wrap: nowrap;
+  }
+  .tree-level:last-child { margin-bottom: 0; }
+  .tree-node {
+    background: var(--surface);
+    border: 2px solid var(--gold-400);
+    border-radius: 14px;
+    padding: 8px 10px;
+    min-width: 90px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s;
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+  }
+  .tree-node:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(184, 134, 11, 0.25); }
+  .tree-node.root { background: var(--grad-luxe); border-color: var(--rose-600); color: white; min-width: 110px; }
+  .tree-node.level-1 { background: var(--grad-gold); color: white; border-color: var(--gold-600); }
+  .tree-node.has-children::after {
+    content: '+';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--rose-500);
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    border: 2px solid var(--surface);
+    z-index: 2;
+  }
+  .tree-node.expanded.has-children::after { content: '−'; background: var(--gold-600); }
+  .tree-node.collapsed > .tree-children { display: none; }
+  .node-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+  }
+  .tree-node:not(.root):not(.level-1) .node-avatar {
+    background: var(--gold-100);
+    color: var(--gold-700);
+    border-color: var(--gold-400);
+  }
+  .node-name {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+  .node-id {
+    font-size: 9px;
+    opacity: 0.85;
+    font-weight: 500;
+  }
+
+  /* SVG lines layer */
+  .tree-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+  }
+  .tree-lines path { stroke: var(--gold-500); stroke-width: 2; fill: none; }
+  [data-theme="dark"] .tree-lines path { stroke: var(--gold-400); }
+
+  /* Member list table */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid var(--border-soft);
+    background: var(--surface);
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 580px;
+  }
+  thead { background: var(--grad-gold); color: white; }
+  th, td { padding: 11px 12px; text-align: left; }
+  th { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; user-select: none; white-space: nowrap; }
+  th .sort-arrow { opacity: 0.5; margin-left: 4px; }
+  th.sorted-asc .sort-arrow, th.sorted-desc .sort-arrow { opacity: 1; }
+  tbody tr { border-top: 1px solid var(--border-soft); }
+  tbody tr:hover { background: var(--bg-soft); }
+  .badge-pos {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-pos.left { background: var(--rose-100); color: var(--rose-700); }
+  .badge-pos.right { background: var(--gold-100); color: var(--gold-700); }
+  [data-theme="dark"] .badge-pos.left { background: rgba(233, 30, 99, 0.2); color: var(--rose-300); }
+  [data-theme="dark"] .badge-pos.right { background: rgba(212, 160, 23, 0.2); color: var(--gold-300); }
+  .status-active { color: #2D9B5E; font-weight: 600; }
+  .status-pending { color: var(--rose-600); font-weight: 600; }
+
+  /* Add member form */
+  .add-form { padding: 4px; }
+
+  /* ============== BELANJA ============== */
+  .product-hero {
+    background: var(--grad-gold);
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .product-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 194, 208, 0.4), transparent 70%);
+    border-radius: 50%;
+  }
+  .product-img {
+    width: 90px;
+    height: 110px;
+    background: linear-gradient(180deg, #FFC2D0 0%, #E91E63 60%, #9C1551 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  .product-img::before {
+    content: 'APG';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .product-img::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 20%;
+    right: 20%;
+    height: 14px;
+    background: var(--gold-300);
+    border-radius: 6px 6px 0 0;
+    border: 1px solid var(--gold-600);
+  }
+  .product-info { position: relative; z-index: 1; }
+  .product-info h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 4px; }
+  .product-info p { font-size: 12px; opacity: 0.95; line-height: 1.5; }
+
+  .package-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .package {
+    background: var(--surface);
+    border-radius: 18px;
+    border: 2px solid var(--border-soft);
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 380px;
+  }
+  .package.featured { border-color: var(--gold-500); }
+  .package.featured::before {
+    content: 'TERLARIS';
+    position: absolute;
+    top: 12px;
+    right: -30px;
+    background: var(--grad-luxe);
+    color: white;
+    padding: 4px 36px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transform: rotate(35deg);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .pkg-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .pkg-tag { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .pkg-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    background: var(--grad-luxe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 14px;
+  }
+  .pkg-features {
+    list-style: none;
+    flex: 1;
+    margin-bottom: 14px;
+  }
+  .pkg-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    padding: 5px 0;
+    color: var(--text-soft);
+  }
+  .pkg-features svg { flex-shrink: 0; margin-top: 2px; color: var(--gold-600); }
+
+  @media (min-width: 700px) {
+    .package-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Payment */
+  .payment-method {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .payment-method:hover { background: var(--bg-soft); }
+  .payment-method.active { border-color: var(--gold-500); background: var(--gold-50); }
+  [data-theme="dark"] .payment-method.active { background: var(--surface-2); }
+  .pm-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--border-soft);
+  }
+  .pm-info { flex: 1; }
+  .pm-name { font-weight: 600; font-size: 14px; }
+  .pm-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .radio-dot {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    position: relative;
+  }
+  .payment-method.active .radio-dot { border-color: var(--gold-600); }
+  .payment-method.active .radio-dot::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: var(--gold-600);
+    border-radius: 50%;
+  }
+
+  .order-summary {
+    background: var(--bg-soft);
+    border-radius: 14px;
+    padding: 14px;
+    border: 1px solid var(--border-soft);
+    margin-bottom: 14px;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+  }
+  .summary-row.total {
+    border-top: 1.5px dashed var(--border);
+    margin-top: 6px;
+    padding-top: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gold-700);
+  }
+
+  /* ============== PROFILE ============== */
+  .profile-header {
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--grad-luxe);
+    color: white;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    border: 3px solid white;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.3);
+  }
+  .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; }
+  .profile-rank {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background: var(--grad-gold);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .profile-id { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  .menu-list { background: var(--surface); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-soft); }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .menu-item:hover { background: var(--bg-soft); }
+  .menu-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--gold-50);
+    color: var(--gold-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  [data-theme="dark"] .menu-icon { background: var(--surface-2); color: var(--gold-300); }
+  .menu-text { flex: 1; }
+  .menu-text > div:first-child { font-weight: 600; font-size: 14px; }
+  .menu-text > div:last-child { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .menu-arrow { color: var(--text-muted); }
+
+  /* Theme toggle */
+  .toggle {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    background: var(--border);
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .toggle.on { background: var(--grad-gold); }
+  .toggle.on::after { transform: translateX(22px); }
+
+  /* ============== BOTTOM NAV ============== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    padding: 8px 4px;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(184, 134, 11, 0.1);
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+  .nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    border-radius: 12px;
+    position: relative;
+  }
+  .nav-item.active { color: var(--gold-700); }
+  [data-theme="dark"] .nav-item.active { color: var(--gold-300); }
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: var(--grad-gold);
+    border-radius: 0 0 4px 4px;
+  }
+  .nav-icon { display: flex; justify-content: center; margin-bottom: 2px; }
+  .nav-label { font-size: 10px; font-weight: 600; }
+
+  /* ============== MODAL ============== */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(42, 31, 10, 0.6);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    animation: fadeIn 0.25s;
+  }
+  .modal-backdrop.active { display: flex; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal {
+    background: var(--surface);
+    border-radius: 24px 24px 0 0;
+    width: 100%;
+    max-width: 500px;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 24px 20px;
+    animation: slideUp 0.3s ease;
+    position: relative;
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .modal-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: -10px auto 16px;
+  }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--bg-soft);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-120%);
+    background: var(--surface);
+    border: 1px solid var(--gold-500);
+    border-radius: 14px;
+    padding: 12px 18px;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.3);
+    z-index: 300;
+    transition: transform 0.3s;
+    max-width: 90%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--grad-gold);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Bali ornament svg styling */
+  .bali-svg { display: block; }
+
+  /* Section header */
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  .section-head h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .section-head a {
+    font-size: 12px;
+    color: var(--gold-700);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Decorative divider */
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    gap: 8px;
+    color: var(--gold-500);
+  }
+  .divider-ornament::before, .divider-ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-400), transparent);
+  }
+
+  /* utility */
+  .text-center { text-align: center; }
+  .mb-12 { margin-bottom: 12px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mt-12 { margin-top: 12px; }
+  .flex { display: flex; }
+  .gap-8 { gap: 8px; }
+  .gap-12 { gap: 12px; }
+</style>
+</head>
+<body data-theme="light">
+
+<!-- ============== LOGIN SCREEN ============== -->
+<div id="loginScreen" class="screen active">
+  <!-- Bali ornaments -->
+  <svg class="bali-ornament top-left bali-svg" viewBox="0 0 200 200">
+    <g fill="none" stroke="#D4A017" stroke-width="1.2" opacity="0.7">
+      <circle cx="100" cy="100" r="80"/>
+      <circle cx="100" cy="100" r="60"/>
+      <circle cx="100" cy="100" r="40"/>
+      <path d="M100,20 L100,180 M20,100 L180,100 M40,40 L160,160 M40,160 L160,40"/>
+      <path d="M100,40 Q120,60 100,80 Q80,60 100,40 Z" fill="#E91E63" opacity="0.5"/>
+      <path d="M100,120 Q120,140 100,160 Q80,140 100,120 Z" fill="#E91E63" opacity="0.5"/>
+      <path d="M40,100 Q60,80 80,100 Q60,120 40,100 Z" fill="#D4A017" opacity="0.5"/>
+      <path d="M120,100 Q140,80 160,100 Q140,120 120,100 Z" fill="#D4A017" opacity="0.5"/>
+    </g>
+  </svg>
+  <svg class="bali-ornament bottom-right bali-svg" viewBox="0 0 200 200">
+    <g fill="none" stroke="#E91E63" stroke-width="1.2" opacity="0.6">
+      <path d="M100,30 C130,30 160,60 160,100 C160,140 130,170 100,170 C70,170 40,140 40,100 C40,60 70,30 100,30 Z"/>
+      <path d="M100,50 C120,50 140,70 140,100 C140,130 120,150 100,150 C80,150 60,130 60,100 C60,70 80,50 100,50 Z"/>
+      <path d="M70,100 Q100,70 130,100 Q100,130 70,100 Z" fill="#D4A017" opacity="0.4"/>
+      <circle cx="100" cy="100" r="8" fill="#D4A017"/>
+    </g>
+  </svg>
+
+  <div class="login-card">
+    <div class="login-logo">A</div>
+    <div class="subtitle">APG Bali Wellness</div>
+    <h1>Selamat Datang</h1>
+    <p class="tagline">"Sehat Sejahtera, Inspirasi dari Pulau Dewata"</p>
+
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>Email atau Username</label>
+        <input type="text" class="form-input" value="demo@apgbali.id" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-input" value="demo123" required>
+      </div>
+      <button type="submit" class="btn btn-primary">
+        Masuk ke Dashboard
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+    <div class="login-foot">
+      Belum punya akun? <a href="#">Daftar Sekarang</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============== APP SCREEN ============== -->
+<div id="appScreen" class="screen">
+
+  <!-- HEADER -->
+  <div class="app-header" id="appHeader">
+    <div class="header-top">
+      <div>
+        <div class="header-greet">Om Swastiastu 🙏</div>
+        <div class="header-name" id="headerUserName">Ni Made Ayu</div>
+      </div>
+      <div class="header-icons">
+        <div class="icon-btn" onclick="showNotifications()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="badge">3</span>
+        </div>
+        <div class="icon-btn" onclick="navigateTo('profile')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="page-title" id="pageTitle">Dashboard</div>
+    <div class="page-sub" id="pageSub">Pantau perkembangan bisnis Anda hari ini</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ============== DASHBOARD ============== -->
+    <div class="page active" id="page-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-value">31</div>
+          <div class="stat-label">Total Downline</div>
+        </div>
+        <div class="stat-card rose">
+          <div class="stat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="stat-value">12.5jt</div>
+          <div class="stat-label">Bonus Bulan Ini</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.4 9.6 13 15l-3-3-4.5 4.5"/></svg>
+          </div>
+          <div class="stat-value">85</div>
+          <div class="stat-label">Poin BV</div>
+        </div>
+        <div class="stat-card rose">
+          <div class="stat-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+          </div>
+          <div class="stat-value">Gold</div>
+          <div class="stat-label">Peringkat</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card">
+        <div class="card-title">Aksi Cepat</div>
+        <div class="quick-actions">
+          <div class="qa-item" onclick="navigateTo('member'); switchTab('member', 'add')">
+            <div class="qa-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            </div>
+            <div class="qa-label">Tambah<br>Member</div>
+          </div>
+          <div class="qa-item" onclick="navigateTo('belanja')">
+            <div class="qa-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <div class="qa-label">Belanja<br>Produk</div>
+          </div>
+          <div class="qa-item" onclick="navigateTo('presentasi')">
+            <div class="qa-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            </div>
+            <div class="qa-label">Presentasi<br>Produk</div>
+          </div>
+          <div class="qa-item" onclick="showToast('Fitur tersedia segera ✨')">
+            <div class="qa-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="qa-label">Event &<br>Pelatihan</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Birthday Reminder -->
+      <div class="card birthday-card">
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><path d="M12 11V3"/><path d="M8 7l4-4 4 4"/></svg>
+          Reminder Ulang Tahun
+        </div>
+        <div class="card-sub">Berikan ucapan untuk member yang berulang tahun ✨</div>
+        <div id="birthdayList"></div>
+      </div>
+
+      <!-- Promo info -->
+      <div class="card" style="background: var(--grad-rose-gold); color: white; border: none;">
+        <div class="card-title" style="color: white;">🎁 Promo Spesial Galungan</div>
+        <p style="font-size: 13px; line-height: 1.6; margin-bottom: 12px; opacity: 0.95;">
+          Dapatkan diskon 15% untuk pembelian Paket Premium hingga 31 Mei 2026. Bonus tambahan untuk member yang mencapai 10 downline aktif!
+        </p>
+        <button class="btn btn-sm" style="background: white; color: var(--gold-700);" onclick="navigateTo('belanja')">Lihat Paket →</button>
+      </div>
+    </div>
+
+    <!-- ============== PRESENTASI ============== -->
+    <div class="page" id="page-presentasi">
+      <!-- Video -->
+      <div class="card" style="padding: 14px;">
+        <div class="video-wrapper" id="videoWrapper">
+          <div class="video-poster" id="videoPoster" onclick="playVideo()">
+            <div class="play-btn">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-title">APG Bali Wellness</div>
+            <div class="video-sub">Tonton presentasi produk lengkap</div>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-muted); text-align: center;">
+          🎬 Video presentasi resmi APG · 4 menit
+        </div>
+      </div>
+
+      <!-- About product -->
+      <div class="card">
+        <div class="card-title">Tentang APG</div>
+        <p style="font-size: 14px; line-height: 1.7; color: var(--text-soft);">
+          <strong style="color: var(--text);">APG (Alami Penuh Gizi)</strong> adalah minuman kesehatan tinggi serat yang diformulasikan khusus dengan rempah-rempah pilihan dari tanah Bali. Setiap sachet mengandung serat alami yang membantu menjaga kesehatan pencernaan, menurunkan kolesterol, dan menjaga berat badan ideal.
+        </p>
+        <div class="divider-ornament">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 8 L20 8 L15 12 L17 18 L12 14 L7 18 L9 12 L4 8 L10 8 Z"/></svg>
+        </div>
+        <p style="font-size: 13px; line-height: 1.7; color: var(--text-soft); font-style: italic; text-align: center;">
+          "Inspirasi dari tradisi <em>Jamu Bali</em> yang diolah modern untuk kesehatan keluarga Indonesia."
+        </p>
+      </div>
+
+      <!-- Ingredients -->
+      <div class="card">
+        <div class="card-title">Komposisi Premium</div>
+        <div class="card-sub">Bahan alami pilihan dari Bali & Nusantara</div>
+        <div class="ingredient-grid">
+          <div class="ingredient">
+            <div class="ingredient-icon">🌿</div>
+            <div>
+              <div class="ingredient-name">Daun Kelor</div>
+              <div class="ingredient-desc">Anti-oksidan tinggi</div>
+            </div>
+          </div>
+          <div class="ingredient">
+            <div class="ingredient-icon">🟠</div>
+            <div>
+              <div class="ingredient-name">Kunyit Bali</div>
+              <div class="ingredient-desc">Anti-inflamasi</div>
+            </div>
+          </div>
+          <div class="ingredient">
+            <div class="ingredient-icon">🌾</div>
+            <div>
+              <div class="ingredient-name">Psyllium Husk</div>
+              <div class="ingredient-desc">Serat larut tinggi</div>
+            </div>
+          </div>
+          <div class="ingredient">
+            <div class="ingredient-icon">🍯</div>
+            <div>
+              <div class="ingredient-name">Madu Murni</div>
+              <div class="ingredient-desc">Pemanis alami</div>
+            </div>
+          </div>
+          <div class="ingredient">
+            <div class="ingredient-icon">🫚</div>
+            <div>
+              <div class="ingredient-name">Jahe Merah</div>
+              <div class="ingredient-desc">Penghangat tubuh</div>
+            </div>
+          </div>
+          <div class="ingredient">
+            <div class="ingredient-icon">🍵</div>
+            <div>
+              <div class="ingredient-name">Teh Hijau</div>
+              <div class="ingredient-desc">Detoks alami</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="card">
+        <div class="card-title">Manfaat Utama</div>
+        <ul class="benefit-list">
+          <li>
+            <span class="benefit-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div><strong>Melancarkan pencernaan</strong> dan mengatasi masalah sembelit</div>
+          </li>
+          <li>
+            <span class="benefit-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div><strong>Menurunkan kadar kolesterol</strong> jahat dan menjaga kesehatan jantung</div>
+          </li>
+          <li>
+            <span class="benefit-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div><strong>Membantu program diet</strong> dengan rasa kenyang lebih lama</div>
+          </li>
+          <li>
+            <span class="benefit-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div><strong>Meningkatkan imunitas</strong> dengan kandungan antioksidan tinggi</div>
+          </li>
+          <li>
+            <span class="benefit-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div><strong>Menstabilkan gula darah</strong> dan mencegah diabetes tipe 2</div>
+          </li>
+          <li>
+            <span class="benefit-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div><strong>Detoksifikasi alami</strong> membersihkan racun dalam tubuh</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Certificates -->
+      <div class="card">
+        <div class="card-title">Sertifikasi & Legalitas</div>
+        <div class="quick-actions" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="qa-item">
+            <div class="qa-icon" style="background: linear-gradient(135deg, #2D9B5E, #1F7340);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="qa-label">HALAL<br>MUI</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-icon" style="background: linear-gradient(135deg, #1976D2, #0D47A1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="qa-label">BPOM<br>RI</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div class="qa-label">ISO<br>22000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== MEMBER ============== -->
+    <div class="page" id="page-member">
+      <div class="tabs">
+        <div class="tab active" data-tab="tree" onclick="switchTab('member', 'tree')">Binary Tree</div>
+        <div class="tab" data-tab="list" onclick="switchTab('member', 'list')">List Member</div>
+        <div class="tab" data-tab="add" onclick="switchTab('member', 'add')">Tambah Member</div>
+      </div>
+
+      <!-- TREE TAB -->
+      <div class="tab-content" id="member-tree">
+        <div class="card">
+          <div class="card-title">Struktur Jaringan Binary</div>
+          <div class="card-sub">Tap node untuk expand / collapse · Geser ke samping untuk melihat semua →</div>
+          <div class="tree-container">
+            <div class="tree-canvas" id="treeCanvas">
+              <!-- Tree rendered by JS -->
+            </div>
+          </div>
+          <div style="display: flex; gap: 12px; justify-content: center; margin-top: 14px; font-size: 11px; color: var(--text-muted);">
+            <span><span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--rose-500); margin-right: 4px;"></span> You</span>
+            <span><span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--gold-500); margin-right: 4px;"></span> Direct</span>
+            <span><span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 2px solid var(--gold-400); margin-right: 4px;"></span> Downline</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Ringkasan Jaringan</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="text-align: center; padding: 12px; background: var(--rose-50); border-radius: 12px; border: 1px solid var(--rose-200);">
+              <div style="font-size: 11px; color: var(--rose-700); margin-bottom: 4px; font-weight: 600; text-transform: uppercase;">Kaki Kiri</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--rose-600);">15</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Total downline</div>
+            </div>
+            <div style="text-align: center; padding: 12px; background: var(--gold-50); border-radius: 12px; border: 1px solid var(--gold-200);">
+              <div style="font-size: 11px; color: var(--gold-700); margin-bottom: 4px; font-weight: 600; text-transform: uppercase;">Kaki Kanan</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--gold-700);">16</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Total downline</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST TAB -->
+      <div class="tab-content" id="member-list" style="display: none;">
+        <div class="card">
+          <div class="card-title">Daftar Lengkap Member</div>
+          <div class="card-sub">Klik header kolom untuk sortir · Geser tabel ke samping →</div>
+          <div style="margin-bottom: 12px;">
+            <input type="text" class="form-input" id="searchMember" placeholder="🔍 Cari nama, ID, atau lokasi..." oninput="renderMemberList()">
+          </div>
+          <div class="table-wrap">
+            <table id="memberTable">
+              <thead>
+                <tr>
+                  <th data-sort="id">ID <span class="sort-arrow">↕</span></th>
+                  <th data-sort="name">Nama <span class="sort-arrow">↕</span></th>
+                  <th data-sort="position">Posisi <span class="sort-arrow">↕</span></th>
+                  <th data-sort="level">Level <span class="sort-arrow">↕</span></th>
+                  <th data-sort="location">Lokasi <span class="sort-arrow">↕</span></th>
+                  <th data-sort="status">Status <span class="sort-arrow">↕</span></th>
+                  <th data-sort="join">Bergabung <span class="sort-arrow">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="memberTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD TAB -->
+      <div class="tab-content" id="member-add" style="display: none;">
+        <div class="card">
+          <div class="card-title">Daftarkan Member Baru</div>
+          <div class="card-sub">Lengkapi formulir di bawah · Field bertanda <span style="color: var(--rose-500);">*</span> wajib diisi</div>
+
+          <form onsubmit="handleAddMember(event)" class="add-form">
+            <div class="form-group">
+              <label>ID Sponsor <span class="req">*</span></label>
+              <input type="text" class="form-input" id="addSponsor" placeholder="Contoh: APG-001" value="APG-001" required>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">ID yang mensponsori member baru ini</div>
+            </div>
+
+            <div class="form-group">
+              <label>Nama Lengkap <span class="req">*</span></label>
+              <input type="text" class="form-input" id="addName" placeholder="Nama lengkap sesuai KTP" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label>Posisi <span class="req">*</span></label>
+                <select class="form-input" id="addPosition" required>
+                  <option value="">Pilih posisi</option>
+                  <option value="Kiri">Kaki Kiri</option>
+                  <option value="Kanan">Kaki Kanan</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Jenis Kelamin</label>
+                <select class="form-input" id="addGender">
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>No. Telepon / WhatsApp <span class="req">*</span></label>
+              <input type="tel" class="form-input" id="addPhone" placeholder="+62 8xx-xxxx-xxxx" required>
+            </div>
+
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" class="form-input" id="addEmail" placeholder="email@contoh.com">
+            </div>
+
+            <div class="form-group">
+              <label>Tanggal Lahir</label>
+              <input type="date" class="form-input" id="addBirth">
+            </div>
+
+            <div class="form-group">
+              <label>Kota / Kabupaten</label>
+              <input type="text" class="form-input" id="addCity" placeholder="Contoh: Denpasar">
+            </div>
+
+            <div class="form-group">
+              <label>Alamat Lengkap</label>
+              <textarea class="form-input" id="addAddress" rows="3" placeholder="Jalan, RT/RW, Desa/Kelurahan, Kecamatan"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Paket Awal <span class="req">*</span></label>
+              <select class="form-input" id="addPackage" required>
+                <option value="">Pilih paket</option>
+                <option value="Silver">Paket Silver - Rp 2.200.000</option>
+                <option value="Gold">Paket Gold - Rp 6.000.000</option>
+                <option value="Platinum">Paket Platinum - Rp 22.000.000</option>
+              </select>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 18px;">
+              <button type="button" class="btn btn-ghost" style="flex: 1;" onclick="switchTab('member', 'tree')">Batal</button>
+              <button type="submit" class="btn btn-primary" style="flex: 2;">
+                Daftarkan
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== BELANJA ============== -->
+    <div class="page" id="page-belanja">
+      <!-- Product Hero -->
+      <div class="product-hero">
+        <div class="product-img"></div>
+        <div class="product-info">
+          <h2>APG Premium</h2>
+          <p>Minuman Kesehatan Tinggi Serat<br>30 sachet × 15g · Rasa Original Bali</p>
+          <div style="margin-top: 8px; font-size: 11px; opacity: 0.9;">
+            ⭐ 4.9/5.0 · 12.500+ terjual
+          </div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>Pilih Paket Anda</h3>
+      </div>
+
+      <div class="package-grid">
+        <div class="package">
+          <div class="pkg-name">Paket Silver</div>
+          <div class="pkg-tag">Starter Bali</div>
+          <div class="pkg-price">Rp 2.200.000</div>
+          <ul class="pkg-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>3 Box APG (90 sachet)</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aktivasi Member Reguler</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Starter Kit Marketing</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Bonus 30 BV</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Akses Pelatihan Online</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Garansi 100% Uang Kembali</li>
+          </ul>
+          <button class="btn btn-outline btn-block" onclick="openPayment('Silver', 2200000)">
+            Beli Paket Silver
+          </button>
+        </div>
+
+        <div class="package featured">
+          <div class="pkg-name">Paket Gold</div>
+          <div class="pkg-tag">Most Popular</div>
+          <div class="pkg-price">Rp 6.000.000</div>
+          <ul class="pkg-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>9 Box APG (270 sachet)</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aktivasi Member Gold</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Premium Marketing Kit</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Bonus 90 BV</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pelatihan Online + Offline</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Mentoring Eksklusif 1:1</li>
+          </ul>
+          <button class="btn btn-primary btn-block" onclick="openPayment('Gold', 6000000)">
+            Beli Paket Gold
+          </button>
+        </div>
+
+        <div class="package">
+          <div class="pkg-name">Paket Platinum</div>
+          <div class="pkg-tag">Bisnis Premium</div>
+          <div class="pkg-price">Rp 22.000.000</div>
+          <ul class="pkg-features">
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>36 Box APG (1.080 sachet)</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Aktivasi Member Platinum</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>VIP Marketing Suite</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Bonus 350 BV</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Retreat Bali Eksklusif</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Royalty Bonus Lifetime</li>
+          </ul>
+          <button class="btn btn-rose btn-block" onclick="openPayment('Platinum', 22000000)">
+            Beli Paket Platinum
+          </button>
+        </div>
+      </div>
+
+      <div class="card" style="background: var(--bg-soft);">
+        <div class="card-title" style="font-size: 16px;">💡 Mengapa Memilih APG?</div>
+        <p style="font-size: 13px; line-height: 1.6; color: var(--text-soft);">
+          Selain mendapatkan produk kesehatan premium, Anda juga mendapatkan kesempatan untuk membangun bisnis MLM binary yang menguntungkan dengan sistem bonus harian, bonus pasangan, dan royalty bulanan.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============== PAYMENT ============== -->
+    <div class="page" id="page-payment">
+      <div class="card">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <button class="btn btn-ghost btn-sm" onclick="navigateTo('belanja')" style="padding: 6px 10px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div>
+            <div class="card-title" style="margin: 0;">Pembayaran</div>
+            <div class="card-sub" style="margin: 0;">Selesaikan pesanan Anda</div>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <div class="summary-row">
+            <span>Paket</span>
+            <strong id="payPkg">-</strong>
+          </div>
+          <div class="summary-row">
+            <span>Harga Paket</span>
+            <span id="payPrice">Rp 0</span>
+          </div>
+          <div class="summary-row">
+            <span>Ongkos Kirim</span>
+            <span>Rp 50.000</span>
+          </div>
+          <div class="summary-row">
+            <span>Biaya Admin</span>
+            <span>Rp 5.000</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total Pembayaran</span>
+            <span id="payTotal">Rp 0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="font-size: 16px;">Alamat Pengiriman</div>
+        <div class="form-group">
+          <label>Nama Penerima</label>
+          <input type="text" class="form-input" value="Ni Made Ayu Lestari">
+        </div>
+        <div class="form-group">
+          <label>No. Telepon</label>
+          <input type="tel" class="form-input" value="+62 812-3456-7890">
+        </div>
+        <div class="form-group">
+          <label>Alamat Lengkap</label>
+          <textarea class="form-input" rows="3">Jl. Pantai Berawa No. 88, Canggu, Kuta Utara, Badung, Bali 80361</textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="font-size: 16px;">Pilih Metode Pembayaran</div>
+
+        <div class="payment-method active" onclick="selectPayment(this)">
+          <div class="pm-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="pm-info">
+            <div class="pm-name">Bank Transfer (BCA)</div>
+            <div class="pm-desc">3098-771-882 a.n. PT APG Bali Wellness</div>
+          </div>
+          <div class="radio-dot"></div>
+        </div>
+
+        <div class="payment-method" onclick="selectPayment(this)">
+          <div class="pm-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="pm-info">
+            <div class="pm-name">Bank Transfer (Mandiri)</div>
+            <div class="pm-desc">144-00-0123-456-7 a.n. PT APG Bali Wellness</div>
+          </div>
+          <div class="radio-dot"></div>
+        </div>
+
+        <div class="payment-method" onclick="selectPayment(this)">
+          <div class="pm-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--rose-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+          </div>
+          <div class="pm-info">
+            <div class="pm-name">QRIS</div>
+            <div class="pm-desc">Scan untuk pembayaran instan</div>
+          </div>
+          <div class="radio-dot"></div>
+        </div>
+
+        <div class="payment-method" onclick="selectPayment(this)">
+          <div class="pm-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <div class="pm-info">
+            <div class="pm-name">E-Wallet (GoPay/OVO/Dana)</div>
+            <div class="pm-desc">Bayar via aplikasi favorit Anda</div>
+          </div>
+          <div class="radio-dot"></div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" style="margin-bottom: 16px;" onclick="confirmPayment()">
+        Konfirmasi Pembayaran
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+
+    <!-- ============== PROFILE ============== -->
+    <div class="page" id="page-profile">
+      <div class="card" style="background: var(--grad-bali); border: none;">
+        <div class="profile-header">
+          <div class="profile-avatar">N</div>
+          <div class="profile-name">Ni Made Ayu Lestari</div>
+          <div class="profile-rank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+            Gold Member
+          </div>
+          <div class="profile-id">ID: APG-001 · Bergabung Jan 2024</div>
+        </div>
+      </div>
+
+      <div class="section-head"><h3>Pengaturan</h3></div>
+      <div class="menu-list">
+        <div class="menu-item" onclick="toggleTheme()">
+          <div class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </div>
+          <div class="menu-text">
+            <div>Tema Gelap</div>
+            <div>Ubah tampilan aplikasi</div>
+          </div>
+          <div class="toggle" id="themeToggle"></div>
+        </div>
+
+        <div class="menu-item" onclick="openNotifBroadcast()">
+          <div class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          </div>
+          <div class="menu-text">
+            <div>Kirim Notifikasi Broadcast</div>
+            <div>Kirim pesan ke semua member</div>
+          </div>
+          <div class="menu-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+
+        <div class="menu-item" onclick="showToast('Edit profil tersedia segera')">
+          <div class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="menu-text">
+            <div>Edit Profil</div>
+            <div>Perbarui data diri</div>
+          </div>
+          <div class="menu-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+
+        <div class="menu-item" onclick="showToast('Keamanan akun')">
+          <div class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="menu-text">
+            <div>Keamanan & Password</div>
+            <div>Ubah password & 2FA</div>
+          </div>
+          <div class="menu-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+
+        <div class="menu-item" onclick="showToast('Riwayat transaksi')">
+          <div class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="menu-text">
+            <div>Riwayat Transaksi</div>
+            <div>Lihat pesanan & bonus</div>
+          </div>
+          <div class="menu-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+
+        <div class="menu-item" onclick="showToast('Pusat bantuan')">
+          <div class="menu-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="menu-text">
+            <div>Pusat Bantuan</div>
+            <div>FAQ & kontak support</div>
+          </div>
+          <div class="menu-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+
+        <div class="menu-item" onclick="handleLogout()" style="color: var(--rose-600);">
+          <div class="menu-icon" style="background: var(--rose-50); color: var(--rose-600);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+          <div class="menu-text">
+            <div style="color: var(--rose-600);">Keluar</div>
+            <div>Logout dari akun</div>
+          </div>
+          <div class="menu-arrow" style="color: var(--rose-400);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding: 20px 0; color: var(--text-muted); font-size: 11px;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; margin-bottom: 4px;">APG Bali Wellness</div>
+        <div>Versi 2.6.0 · © 2026 PT APG Indonesia</div>
+        <div style="margin-top: 4px; font-style: italic;">"Om Santhi Santhi Santhi Om"</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="nav-label">Dashboard</div>
+    </div>
+    <div class="nav-item" data-page="presentasi" onclick="navigateTo('presentasi')">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
+      <div class="nav-label">Presentasi</div>
+    </div>
+    <div class="nav-item" data-page="member" onclick="navigateTo('member')">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="nav-label">Member</div>
+    </div>
+    <div class="nav-item" data-page="belanja" onclick="navigateTo('belanja')">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </div>
+      <div class="nav-label">Belanja</div>
+    </div>
+    <div class="nav-item" data-page="profile" onclick="navigateTo('profile')">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="nav-label">Profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== MODALS ============== -->
+
+<!-- Notifications Modal -->
+<div class="modal-backdrop" id="notifModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('notifModal')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div class="modal-title">Notifikasi</div>
+    <div style="margin-top: 16px;">
+      <div class="birthday-item" style="background: var(--gold-50);">
+        <div class="birthday-avatar" style="background: var(--grad-gold);">🎁</div>
+        <div class="birthday-info">
+          <div class="birthday-name">Promo Galungan Spesial</div>
+          <div class="birthday-date">Diskon 15% untuk Paket Gold · 2 jam lalu</div>
+        </div>
+      </div>
+      <div class="birthday-item" style="background: var(--rose-50);">
+        <div class="birthday-avatar" style="background: var(--grad-luxe);">🎉</div>
+        <div class="birthday-info">
+          <div class="birthday-name">Selamat! Anda Naik Peringkat</div>
+          <div class="birthday-date">Anda kini menjadi Gold Member · Kemarin</div>
+        </div>
+      </div>
+      <div class="birthday-item">
+        <div class="birthday-avatar" style="background: var(--grad-gold);">💰</div>
+        <div class="birthday-info">
+          <div class="birthday-name">Bonus Pasangan Masuk</div>
+          <div class="birthday-date">Rp 350.000 telah ditransfer · 3 hari lalu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification Broadcast Modal -->
+<div class="modal-backdrop" id="broadcastModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('broadcastModal')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div class="modal-title">📢 Kirim Broadcast</div>
+    <p style="text-align: center; color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">
+      Kirim notifikasi ke seluruh pengguna atau member
+    </p>
+
+    <form onsubmit="sendBroadcast(event)">
+      <div class="form-group">
+        <label>Target Penerima</label>
+        <select class="form-input">
+          <option>Semua Pengguna (31 orang)</option>
+          <option>Hanya Member Aktif (28 orang)</option>
+          <option>Member Kaki Kiri (15 orang)</option>
+          <option>Member Kaki Kanan (16 orang)</option>
+          <option>Member Gold ke atas (12 orang)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Judul Notifikasi</label>
+        <input type="text" class="form-input" placeholder="Contoh: Promo Galungan Spesial" required>
+      </div>
+      <div class="form-group">
+        <label>Isi Pesan</label>
+        <textarea class="form-input" rows="4" placeholder="Tulis pesan Anda di sini..." required>Halo Member APG yang luar biasa! Jangan lewatkan promo spesial bulan ini...</textarea>
+      </div>
+      <div class="form-group">
+        <label>Kategori</label>
+        <select class="form-input">
+          <option>📢 Pengumuman Umum</option>
+          <option>🎁 Promo & Diskon</option>
+          <option>📅 Event & Pelatihan</option>
+          <option>⚠️ Penting</option>
+        </select>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button type="button" class="btn btn-ghost" style="flex: 1;" onclick="closeModal('broadcastModal')">Batal</button>
+        <button type="submit" class="btn btn-primary" style="flex: 2;">
+          Kirim Broadcast
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Birthday Wish Modal -->
+<div class="modal-backdrop" id="wishModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('wishModal')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div style="font-size: 56px; margin-bottom: 8px;">🎂</div>
+      <div class="modal-title" style="margin-bottom: 4px;">Kirim Ucapan</div>
+      <p style="color: var(--text-muted); font-size: 13px;">
+        Untuk: <strong id="wishTarget" style="color: var(--text);">-</strong>
+      </p>
+    </div>
+
+    <div class="form-group">
+      <label>Pilih Template Ucapan</label>
+      <select class="form-input" id="wishTemplate" onchange="setWishTemplate(this.value)">
+        <option value="0">-- Pilih Template --</option>
+        <option value="1">Ucapan Formal Bisnis</option>
+        <option value="2">Ucapan dengan Nuansa Bali</option>
+        <option value="3">Ucapan Singkat & Hangat</option>
+        <option value="4">Ucapan Spiritual</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Pesan Ulang Tahun</label>
+      <textarea class="form-input" id="wishMessage" rows="5" placeholder="Tulis ucapan ulang tahun..."></textarea>
+    </div>
+
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+      <button class="btn btn-ghost btn-sm">🎉 Selamat</button>
+      <button class="btn btn-ghost btn-sm">🌸 Bahagia</button>
+      <button class="btn btn-ghost btn-sm">🙏 Berkah</button>
+      <button class="btn btn-ghost btn-sm">✨ Sukses</button>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <button class="btn btn-ghost" style="flex: 1;" onclick="closeModal('wishModal')">Batal</button>
+      <button class="btn btn-primary" style="flex: 2;" onclick="sendWish()">
+        Kirim Ucapan
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-icon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <span id="toastMsg">Berhasil!</span>
+</div>
+
+<script>
+/* ============== STATE ============== */
+let currentPage = 'dashboard';
+let currentWishTarget = '';
+let selectedSort = { key: null, asc: true };
+
+const pageMeta = {
+  dashboard:  { title: 'Dashboard',   sub: 'Pantau perkembangan bisnis Anda hari ini' },
+  presentasi: { title: 'Presentasi',  sub: 'Pelajari produk APG secara mendalam' },
+  member:     { title: 'Member',      sub: 'Kelola jaringan dan downline Anda' },
+  belanja:    { title: 'Belanja',     sub: 'Pilih paket terbaik untuk Anda' },
+  payment:    { title: 'Pembayaran',  sub: 'Selesaikan pesanan Anda' },
+  profile:    { title: 'Profil Saya', sub: 'Kelola akun dan pengaturan' }
+};
+
+/* ============== BINARY TREE DATA ============== */
+/* Pohon binary: root + 5 generasi ke bawah */
+const treeData = {
+  id: 'APG-001', name: 'Ni Made Ayu', initial: 'NA', root: true,
+  children: [
+    { /* Kaki Kiri */
+      id: 'APG-002', name: 'I Wayan Sudana', initial: 'WS', position: 'Kiri',
+      children: [
+        { id: 'APG-004', name: 'Kadek Pratiwi', initial: 'KP', position: 'Kiri',
+          children: [
+            { id: 'APG-008', name: 'Putu Diah', initial: 'PD', position: 'Kiri',
+              children: [
+                { id: 'APG-016', name: 'Made Arya', initial: 'MA', position: 'Kiri',
+                  children: [
+                    { id: 'APG-032', name: 'Komang Sari', initial: 'KS', position: 'Kiri' },
+                    { id: 'APG-033', name: 'Wayan Eka', initial: 'WE', position: 'Kanan' }
+                  ]
+                },
+                { id: 'APG-017', name: 'Nyoman Bagus', initial: 'NB', position: 'Kanan' }
+              ]
+            },
+            { id: 'APG-009', name: 'Komang Wira', initial: 'KW', position: 'Kanan',
+              children: [
+                { id: 'APG-018', name: 'Gede Sutha', initial: 'GS', position: 'Kiri' }
+              ]
+            }
+          ]
+        },
+        { id: 'APG-005', name: 'Gede Mahardika', initial: 'GM', position: 'Kanan',
+          children: [
+            { id: 'APG-010', name: 'Luh Sari', initial: 'LS', position: 'Kiri',
+              children: [
+                { id: 'APG-020', name: 'Putu Wira', initial: 'PW', position: 'Kiri' }
+              ]
+            },
+            { id: 'APG-011', name: 'Ketut Adi', initial: 'KA', position: 'Kanan' }
+          ]
+        }
+      ]
+    },
+    { /* Kaki Kanan */
+      id: 'APG-003', name: 'Ni Luh Sari', initial: 'LS', position: 'Kanan',
+      children: [
+        { id: 'APG-006', name: 'Putu Bagus', initial: 'PB', position: 'Kiri',
+          children: [
+            { id: 'APG-012', name: 'Wayan Asih', initial: 'WA', position: 'Kiri',
+              children: [
+                { id: 'APG-022', name: 'Made Rai', initial: 'MR', position: 'Kiri',
+                  children: [
+                    { id: 'APG-040', name: 'Nyoman Eka', initial: 'NE', position: 'Kiri' }
+                  ]
+                }
+              ]
+            },
+            { id: 'APG-013', name: 'Made Putri', initial: 'MP', position: 'Kanan' }
+          ]
+        },
+        { id: 'APG-007', name: 'Komang Surya', initial: 'KS', position: 'Kanan',
+          children: [
+            { id: 'APG-014', name: 'Nyoman Ari', initial: 'NA', position: 'Kiri',
+              children: [
+                { id: 'APG-024', name: 'Kadek Indah', initial: 'KI', position: 'Kiri' },
+                { id: 'APG-025', name: 'Putu Ngurah', initial: 'PN', position: 'Kanan' }
+              ]
+            },
+            { id: 'APG-015', name: 'Gede Wisnu', initial: 'GW', position: 'Kanan',
+              children: [
+                { id: 'APG-026', name: 'Komang Yuli', initial: 'KY', position: 'Kanan' }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+/* Track expanded state of each node */
+const expandedNodes = new Set();
+
+/* Auto-expand the first 2 levels for initial display */
+function autoExpand(node, depth = 0) {
+  if (depth < 2 && node.children && node.children.length) {
+    expandedNodes.add(node.id);
+    node.children.forEach(c => autoExpand(c, depth + 1));
+  }
+}
+autoExpand(treeData);
+
+/* ============== RENDER BINARY TREE (level-based) ============== */
+function renderTree() {
+  const canvas = document.getElementById('treeCanvas');
+  if (!canvas) return;
+
+  // Collect visible nodes per level
+  const levels = [];
+  function collect(node, depth, parent) {
+    levels[depth] = levels[depth] || [];
+    levels[depth].push({ node, parent });
+    if (expandedNodes.has(node.id) && node.children) {
+      node.children.forEach(c => collect(c, depth + 1, node));
+    }
+  }
+  collect(treeData, 0, null);
+
+  // Render HTML
+  let html = '';
+  levels.forEach((levelNodes, depth) => {
+    html += `<div class="tree-level" data-level="${depth}">`;
+    levelNodes.forEach(({ node }) => {
+      const hasChildren = node.children && node.children.length;
+      const expanded = expandedNodes.has(node.id);
+      const cls = node.root ? 'root' : (depth === 1 ? 'level-1' : '');
+      html += `
+        <div class="tree-node ${cls} ${hasChildren ? 'has-children' : ''} ${expanded ? 'expanded' : ''}"
+             data-id="${node.id}" onclick="toggleNode('${node.id}', event)">
+          <div class="node-avatar">${node.initial}</div>
+          <div class="node-name">${node.name}</div>
+          <div class="node-id">${node.id}</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  });
+  canvas.innerHTML = html;
+}
+
+function toggleNode(id, event) {
+  if (event) event.stopPropagation();
+  if (expandedNodes.has(id)) {
+    // Collapse this node AND all of its descendants
+    const node = findNode(treeData, id);
+    if (node) collapseAll(node);
+  } else {
+    expandedNodes.add(id);
+  }
+  renderTree();
+}
+
+function findNode(node, id) {
+  if (node.id === id) return node;
+  if (!node.children) return null;
+  for (const c of node.children) {
+    const found = findNode(c, id);
+    if (found) return found;
+  }
+  return null;
+}
+
+function collapseAll(node) {
+  expandedNodes.delete(node.id);
+  if (node.children) node.children.forEach(collapseAll);
+}
+
+/* ============== MEMBER LIST DATA ============== */
+const memberFlat = [
+  { id: 'APG-001', name: 'Ni Made Ayu Lestari', position: '-',     level: 0, location: 'Denpasar',   status: 'Active',  join: '2024-01-15' },
+  { id: 'APG-002', name: 'I Wayan Sudana',      position: 'Kiri',  level: 1, location: 'Ubud',       status: 'Active',  join: '2024-02-03' },
+  { id: 'APG-003', name: 'Ni Luh Sari',         position: 'Kanan', level: 1, location: 'Singaraja',  status: 'Active',  join: '2024-02-10' },
+  { id: 'APG-004', name: 'Kadek Pratiwi',       position: 'Kiri',  level: 2, location: 'Gianyar',    status: 'Active',  join: '2024-03-05' },
+  { id: 'APG-005', name: 'Gede Mahardika',      position: 'Kanan', level: 2, location: 'Tabanan',    status: 'Active',  join: '2024-03-18' },
+  { id: 'APG-006', name: 'Putu Bagus',          position: 'Kiri',  level: 2, location: 'Klungkung',  status: 'Active',  join: '2024-04-02' },
+  { id: 'APG-007', name: 'Komang Surya',        position: 'Kanan', level: 2, location: 'Karangasem', status: 'Active',  join: '2024-04-14' },
+  { id: 'APG-008', name: 'Putu Diah',           position: 'Kiri',  level: 3, location: 'Denpasar',   status: 'Active',  join: '2024-05-09' },
+  { id: 'APG-009', name: 'Komang Wira',         position: 'Kanan', level: 3, location: 'Negara',     status: 'Pending', join: '2024-05-22' },
+  { id: 'APG-010', name: 'Luh Sari',            position: 'Kiri',  level: 3, location: 'Ubud',       status: 'Active',  join: '2024-06-01' },
+  { id: 'APG-011', name: 'Ketut Adi',           position: 'Kanan', level: 3, location: 'Bangli',     status: 'Active',  join: '2024-06-17' },
+  { id: 'APG-012', name: 'Wayan Asih',          position: 'Kiri',  level: 3, location: 'Gianyar',    status: 'Active',  join: '2024-07-04' },
+  { id: 'APG-013', name: 'Made Putri',          position: 'Kanan', level: 3, location: 'Tabanan',    status: 'Active',  join: '2024-07-20' },
+  { id: 'APG-014', name: 'Nyoman Ari',          position: 'Kiri',  level: 3, location: 'Karangasem', status: 'Active',  join: '2024-08-08' },
+  { id: 'APG-015', name: 'Gede Wisnu',          position: 'Kanan', level: 3, location: 'Klungkung',  status: 'Pending', join: '2024-08-25' },
+  { id: 'APG-016', name: 'Made Arya',           position: 'Kiri',  level: 4, location: 'Denpasar',   status: 'Active',  join: '2024-09-10' },
+  { id: 'APG-017', name: 'Nyoman Bagus',        position: 'Kanan', level: 4, location: 'Ubud',       status: 'Active',  join: '2024-09-28' },
+  { id: 'APG-018', name: 'Gede Sutha',          position: 'Kiri',  level: 4, location: 'Singaraja',  status: 'Active',  join: '2024-10-15' },
+  { id: 'APG-020', name: 'Putu Wira',           position: 'Kiri',  level: 4, location: 'Gianyar',    status: 'Active',  join: '2024-11-02' },
+  { id: 'APG-022', name: 'Made Rai',            position: 'Kiri',  level: 4, location: 'Tabanan',    status: 'Active',  join: '2024-11-20' },
+  { id: 'APG-024', name: 'Kadek Indah',         position: 'Kiri',  level: 4, location: 'Denpasar',   status: 'Active',  join: '2024-12-05' },
+  { id: 'APG-025', name: 'Putu Ngurah',         position: 'Kanan', level: 4, location: 'Karangasem', status: 'Active',  join: '2024-12-18' },
+  { id: 'APG-026', name: 'Komang Yuli',         position: 'Kanan', level: 4, location: 'Klungkung',  status: 'Pending', join: '2025-01-08' },
+  { id: 'APG-032', name: 'Komang Sari',         position: 'Kiri',  level: 5, location: 'Denpasar',   status: 'Active',  join: '2025-02-14' },
+  { id: 'APG-033', name: 'Wayan Eka',           position: 'Kanan', level: 5, location: 'Ubud',       status: 'Active',  join: '2025-03-01' },
+  { id: 'APG-040', name: 'Nyoman Eka',          position: 'Kiri',  level: 5, location: 'Tabanan',    status: 'Active',  join: '2025-04-12' }
+];
+
+function renderMemberList() {
+  const tbody = document.getElementById('memberTbody');
+  if (!tbody) return;
+  const q = (document.getElementById('searchMember')?.value || '').toLowerCase();
+  let data = memberFlat.filter(m =>
+    m.name.toLowerCase().includes(q) ||
+    m.id.toLowerCase().includes(q) ||
+    m.location.toLowerCase().includes(q)
+  );
+
+  if (selectedSort.key) {
+    data.sort((a, b) => {
+      let av = a[selectedSort.key], bv = b[selectedSort.key];
+      if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+      if (av < bv) return selectedSort.asc ? -1 : 1;
+      if (av > bv) return selectedSort.asc ? 1 : -1;
+      return 0;
+    });
+  }
+
+  tbody.innerHTML = data.map(m => `
+    <tr>
+      <td><strong>${m.id}</strong></td>
+      <td>${m.name}</td>
+      <td>${m.position === '-' ? '<span style="color:var(--text-muted)">Root</span>' : `<span class="badge-pos ${m.position === 'Kiri' ? 'left' : 'right'}">${m.position}</span>`}</td>
+      <td>L${m.level}</td>
+      <td>${m.location}</td>
+      <td><span class="status-${m.status.toLowerCase()}">${m.status === 'Active' ? '● Aktif' : '○ Pending'}</span></td>
+      <td>${formatDate(m.join)}</td>
+    </tr>
+  `).join('');
+
+  // Update sort indicators
+  document.querySelectorAll('#memberTable th').forEach(th => {
+    th.classList.remove('sorted-asc', 'sorted-desc');
+    const arrow = th.querySelector('.sort-arrow');
+    if (arrow) arrow.textContent = '↕';
+    if (th.dataset.sort === selectedSort.key) {
+      th.classList.add(selectedSort.asc ? 'sorted-asc' : 'sorted-desc');
+      if (arrow) arrow.textContent = selectedSort.asc ? '↑' : '↓';
+    }
+  });
+}
+
+function formatDate(s) {
+  const d = new Date(s);
+  return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+/* ============== NAVIGATION ============== */
+function handleLogin(e) {
+  e.preventDefault();
+  document.getElementById('loginScreen').classList.remove('active');
+  document.getElementById('appScreen').classList.add('active');
+  showToast('Selamat datang kembali! 🙏');
+}
+
+function handleLogout() {
+  if (!confirm('Yakin ingin keluar dari akun?')) return;
+  document.getElementById('appScreen').classList.remove('active');
+  document.getElementById('loginScreen').classList.add('active');
+  navigateTo('dashboard');
+}
+
+function navigateTo(page) {
+  currentPage = page;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) target.classList.add('active');
+
+  // Update bottom nav active state (only for visible nav items)
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.page === page || (page === 'payment' && n.dataset.page === 'belanja'));
+  });
+
+  // Update header
+  const meta = pageMeta[page] || pageMeta.dashboard;
+  document.getElementById('pageTitle').textContent = meta.title;
+  document.getElementById('pageSub').textContent = meta.sub;
+
+  // Special renders
+  if (page === 'member') {
+    renderTree();
+    renderMemberList();
+  }
+  if (page === 'dashboard') renderBirthdays();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchTab(group, tab) {
+  if (group === 'member') {
+    document.querySelectorAll(`#page-member .tab`).forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.getElementById('member-tree').style.display = tab === 'tree' ? 'block' : 'none';
+    document.getElementById('member-list').style.display = tab === 'list' ? 'block' : 'none';
+    document.getElementById('member-add').style.display = tab === 'add' ? 'block' : 'none';
+    if (tab === 'tree') renderTree();
+    if (tab === 'list') renderMemberList();
+  }
+}
+
+/* ============== BIRTHDAY ============== */
+const birthdays = [
+  { name: 'Kadek Pratiwi', id: 'APG-004', date: 'Hari ini, 19 Mei', initial: 'KP', isToday: true },
+  { name: 'Putu Bagus',    id: 'APG-006', date: 'Besok, 20 Mei',    initial: 'PB', isToday: false },
+  { name: 'Wayan Asih',    id: 'APG-012', date: '22 Mei (3 hari lagi)', initial: 'WA', isToday: false }
+];
+
+function renderBirthdays() {
+  const list = document.getElementById('birthdayList');
+  if (!list) return;
+  list.innerHTML = birthdays.map(b => `
+    <div class="birthday-item">
+      <div class="birthday-avatar">${b.initial}</div>
+      <div class="birthday-info">
+        <div class="birthday-name">${b.name} ${b.isToday ? '🎂' : ''}</div>
+        <div class="birthday-date">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          ${b.date}
+        </div>
+      </div>
+      <button class="btn btn-rose btn-sm" onclick="openWish('${b.name}')">
+        🎉 Ucapkan
+      </button>
+    </div>
+  `).join('');
+}
+
+function openWish(name) {
+  currentWishTarget = name;
+  document.getElementById('wishTarget').textContent = name;
+  document.getElementById('wishMessage').value = '';
+  document.getElementById('wishTemplate').value = '0';
+  openModal('wishModal');
+}
+
+function setWishTemplate(idx) {
+  const templates = {
+    '1': `Selamat ulang tahun ${currentWishTarget}!\n\nSemoga di tahun yang baru ini diberikan kesehatan, kesuksesan dalam bisnis APG, dan keberkahan yang melimpah. Sukses selalu untuk Anda dan keluarga.\n\nSalam hangat,\nKeluarga Besar APG Bali Wellness`,
+    '2': `Om Swastiastu 🙏\n\nDumogi rahajeng wanti warsa ${currentWishTarget}!\n\nDumogi setata kenak rahayu, sukses sajeroning kuwentenan miwah merta saking Ida Sang Hyang Widhi Wasa. Manis lan harum bagaikan bunga jepun, sukses senantiasa menyertai langkah Anda.\n\nOm Santhi Santhi Santhi Om`,
+    '3': `🎂 Selamat ulang tahun ${currentWishTarget}! 🎉\n\nSemoga sehat selalu, bahagia, dan sukses bersama APG! ✨🌸`,
+    '4': `Selamat hari kelahiran ${currentWishTarget} 🙏\n\nSemoga Tuhan Yang Maha Esa senantiasa memberikan kesehatan, kedamaian batin, dan kebijaksanaan dalam menjalani hidup. Semoga setiap langkah Anda diberkati dan setiap doa dikabulkan.\n\nOm Santhi Santhi Santhi Om 🪷`
+  };
+  document.getElementById('wishMessage').value = templates[idx] || '';
+}
+
+function sendWish() {
+  const msg = document.getElementById('wishMessage').value.trim();
+  if (!msg) { showToast('Tulis pesan terlebih dahulu', '⚠️'); return; }
+  closeModal('wishModal');
+  showToast(`Ucapan terkirim ke ${currentWishTarget} 🎉`);
+}
+
+/* ============== BELANJA / PAYMENT ============== */
+function openPayment(pkg, price) {
+  document.getElementById('payPkg').textContent = 'Paket ' + pkg;
+  document.getElementById('payPrice').textContent = 'Rp ' + price.toLocaleString('id-ID');
+  document.getElementById('payTotal').textContent = 'Rp ' + (price + 50000 + 5000).toLocaleString('id-ID');
+  navigateTo('payment');
+}
+
+function selectPayment(el) {
+  document.querySelectorAll('.payment-method').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function confirmPayment() {
+  showToast('Pembayaran berhasil diproses ✅');
+  setTimeout(() => navigateTo('dashboard'), 1500);
+}
+
+/* ============== ADD MEMBER ============== */
+function handleAddMember(e) {
+  e.preventDefault();
+  const sponsor = document.getElementById('addSponsor').value.trim();
+  const name = document.getElementById('addName').value.trim();
+  if (!sponsor) { showToast('ID Sponsor wajib diisi!', '⚠️'); return; }
+
+  showToast(`Member ${name} berhasil didaftarkan! 🎉`);
+  e.target.reset();
+  document.getElementById('addSponsor').value = 'APG-001';
+  setTimeout(() => switchTab('member', 'list'), 1500);
+}
+
+/* ============== THEME ============== */
+function toggleTheme(e) {
+  if (e) e.stopPropagation();
+  const body = document.body;
+  const isDark = body.dataset.theme === 'dark';
+  body.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('themeToggle').classList.toggle('on', !isDark);
+}
+
+/* ============== MODALS ============== */
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+  document.body.style.overflow = '';
+}
+function showNotifications() { openModal('notifModal'); }
+function openNotifBroadcast() { openModal('broadcastModal'); }
+function sendBroadcast(e) {
+  e.preventDefault();
+  closeModal('broadcastModal');
+  showToast('Broadcast terkirim ke 31 penerima 📢');
+}
+
+/* close modal on backdrop click */
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', e => {
+    if (e.target === m) m.classList.remove('active');
+  });
+});
+
+/* ============== TOAST ============== */
+function showToast(msg, icon) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  if (icon) t.querySelector('.toast-icon').innerHTML = icon;
+  t.classList.add('show');
+  clearTimeout(window._toast);
+  window._toast = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ============== VIDEO ============== */
+function playVideo() {
+  const wrap = document.getElementById('videoWrapper');
+  const poster = document.getElementById('videoPoster');
+  poster.classList.add('hidden');
+  // Embed dummy YouTube video (a wellness/herbal product promo style)
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1&rel=0';
+  iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+  iframe.setAttribute('allowfullscreen', '');
+  wrap.appendChild(iframe);
+}
+
+/* ============== SORT TABLE ============== */
+document.addEventListener('click', e => {
+  const th = e.target.closest('#memberTable th');
+  if (!th) return;
+  const key = th.dataset.sort;
+  if (!key) return;
+  if (selectedSort.key === key) {
+    selectedSort.asc = !selectedSort.asc;
+  } else {
+    selectedSort.key = key;
+    selectedSort.asc = true;
+  }
+  renderMemberList();
+});
+
+/* ============== INIT ============== */
+renderBirthdays();
+renderTree();
+renderMemberList();
+</script>
+</body>
+</html>
