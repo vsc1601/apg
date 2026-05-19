@@ -698,13 +698,20 @@
   /* SVG lines layer */
   .tree-lines {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     pointer-events: none;
-    width: 100%;
-    height: 100%;
+    z-index: 1;
   }
-  .tree-lines path { stroke: var(--gold-500); stroke-width: 2; fill: none; }
+  .tree-lines path { 
+    stroke: var(--gold-500); 
+    stroke-width: 2; 
+    fill: none;
+    stroke-linecap: round;
+  }
   [data-theme="dark"] .tree-lines path { stroke: var(--gold-400); }
+  .tree-node { z-index: 2; }
+  .tree-level { z-index: 2; position: relative; }
 
   /* Member list table */
   .table-wrap {
@@ -936,6 +943,326 @@
     font-size: 16px;
     color: var(--gold-700);
   }
+
+  /* ============== ACTIVITY TIMELINE ============== */
+  .activity-list { position: relative; }
+  .activity-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    position: relative;
+  }
+  .activity-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 42px;
+    bottom: -4px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold-300), var(--border-soft));
+  }
+  .activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--grad-gold);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.25);
+  }
+  .activity-icon.rose { background: var(--grad-luxe); box-shadow: 0 4px 12px rgba(233, 30, 99, 0.25); }
+  .activity-icon.success { background: linear-gradient(135deg, #2D9B5E, #1F7340); }
+  .activity-icon.info { background: linear-gradient(135deg, #1976D2, #0D47A1); }
+  .activity-content { flex: 1; min-width: 0; padding-top: 2px; }
+  .activity-title { font-weight: 600; font-size: 14px; color: var(--text); line-height: 1.3; }
+  .activity-desc { font-size: 12px; color: var(--text-soft); margin-top: 3px; line-height: 1.4; }
+  .activity-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .activity-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-700);
+  }
+  [data-theme="dark"] .activity-amount { color: var(--gold-300); }
+
+  /* ============== TESTIMONIAL ============== */
+  .testimonial {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--border-soft);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonial::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    color: var(--gold-300);
+    opacity: 0.4;
+    line-height: 1;
+  }
+  .testi-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .testi-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--grad-luxe);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 2px solid var(--gold-400);
+  }
+  .testi-info { flex: 1; min-width: 0; }
+  .testi-name { font-weight: 700; font-size: 14px; }
+  .testi-loc { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; margin-top: 2px; }
+  .testi-rating { display: flex; gap: 2px; margin-top: 4px; color: var(--gold-500); }
+  .testi-quote {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-soft);
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+  }
+  .testi-result {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--gold-50);
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--gold-700);
+    font-weight: 600;
+    border-left: 3px solid var(--gold-500);
+  }
+  [data-theme="dark"] .testi-result {
+    background: var(--surface-2);
+    color: var(--gold-300);
+  }
+
+  /* ============== MEMBER DETAIL MODAL ============== */
+  .detail-section {
+    margin-bottom: 16px;
+  }
+  .detail-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .detail-item {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-soft);
+  }
+  .detail-item.full { grid-column: 1 / -1; }
+  .detail-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .detail-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+  }
+  .detail-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .detail-stat {
+    text-align: center;
+    padding: 12px 6px;
+    background: var(--bg-soft);
+    border-radius: 12px;
+    border: 1px solid var(--border-soft);
+  }
+  .detail-stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    background: var(--grad-luxe);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  .detail-stat-lbl {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .member-row { cursor: pointer; transition: background 0.15s; }
+  .member-row:hover { background: var(--gold-50) !important; }
+  [data-theme="dark"] .member-row:hover { background: var(--surface-2) !important; }
+
+  /* ============== FAQ / HELP CENTER ============== */
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+  .faq-item.open {
+    border-color: var(--gold-500);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.12);
+  }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .faq-q-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--gold-50);
+    color: var(--gold-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  [data-theme="dark"] .faq-q-icon { background: var(--surface-2); color: var(--gold-300); }
+  .faq-item.open .faq-q-icon { background: var(--grad-gold); color: white; }
+  .faq-q-text { flex: 1; line-height: 1.4; }
+  .faq-chev {
+    color: var(--text-muted);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .faq-item.open .faq-chev { transform: rotate(180deg); color: var(--gold-700); }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    padding: 0 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+  .faq-item.open .faq-answer {
+    max-height: 500px;
+    padding: 0 16px 16px 16px;
+  }
+  .faq-answer p { margin-bottom: 8px; }
+  .faq-answer p:last-child { margin-bottom: 0; }
+  .faq-answer strong { color: var(--text); }
+  .faq-answer ul { padding-left: 20px; margin: 6px 0; }
+  .faq-answer ul li { margin-bottom: 4px; }
+
+  .help-category {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .help-cat-pill {
+    padding: 8px 14px;
+    background: var(--surface);
+    border: 1.5px solid var(--border-soft);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .help-cat-pill.active {
+    background: var(--grad-gold);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(184, 134, 11, 0.25);
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .contact-card:hover { background: var(--bg-soft); transform: translateX(2px); }
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--grad-gold);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon.wa { background: linear-gradient(135deg, #25D366, #128C7E); }
+  .contact-icon.email { background: linear-gradient(135deg, #EA4335, #C5221F); }
+  .contact-icon.phone { background: linear-gradient(135deg, #1976D2, #0D47A1); }
+  .contact-info { flex: 1; }
+  .contact-name { font-weight: 600; font-size: 13px; }
+  .contact-detail { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
   /* ============== PROFILE ============== */
   .profile-header {
@@ -1356,6 +1683,100 @@
         <div id="birthdayList"></div>
       </div>
 
+      <!-- Aktivitas Terbaru -->
+      <div class="card">
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Aktivitas Terbaru
+        </div>
+        <div class="card-sub">Update terbaru dari jaringan Anda</div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon rose">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Member baru bergabung</div>
+              <div class="activity-desc"><strong>Nyoman Eka</strong> mendaftar di kaki kiri jaringan Anda dengan Paket Gold</div>
+              <div class="activity-time">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                15 menit lalu
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon success">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Bonus Pasangan diterima <span class="activity-amount">Rp 350.000</span></div>
+              <div class="activity-desc">Bonus pairing dari pasangan kaki kiri-kanan hari ini</div>
+              <div class="activity-time">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                2 jam lalu
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Transaksi berhasil</div>
+              <div class="activity-desc"><strong>Kadek Indah</strong> membeli Paket Silver — <span class="activity-amount">Rp 2.200.000</span></div>
+              <div class="activity-time">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                5 jam lalu
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon info">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Peringkat naik menjadi Gold Member 🎉</div>
+              <div class="activity-desc">Selamat! Anda berhasil mencapai peringkat Gold dengan 30 downline aktif</div>
+              <div class="activity-time">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Kemarin, 14:30
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon rose">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Broadcast dari Admin APG</div>
+              <div class="activity-desc">Pelatihan Online "Strategi Closing Cepat" — Sabtu, 24 Mei pukul 19:00 WITA</div>
+              <div class="activity-time">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                2 hari lalu
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-item">
+            <div class="activity-icon success">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="activity-content">
+              <div class="activity-title">Withdraw bonus berhasil <span class="activity-amount">Rp 2.500.000</span></div>
+              <div class="activity-desc">Dana telah ditransfer ke rekening BCA •••• 4521</div>
+              <div class="activity-time">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                3 hari lalu
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Promo info -->
       <div class="card" style="background: var(--grad-rose-gold); color: white; border: none;">
         <div class="card-title" style="color: white;">🎁 Promo Spesial Galungan</div>
@@ -1512,6 +1933,99 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
             </div>
             <div class="qa-label">ISO<br>22000</div>
+          </div>
+        </div>
+      </div>
+      <!-- Testimoni -->
+      <div class="card">
+        <div class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Testimoni Pelanggan
+        </div>
+        <div class="card-sub">Pengalaman nyata dari pengguna setia APG</div>
+
+        <div class="testimonial">
+          <div class="testi-header">
+            <div class="testi-avatar">IM</div>
+            <div class="testi-info">
+              <div class="testi-name">Ibu Made Wirastuti</div>
+              <div class="testi-loc">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ubud, Bali · 52 tahun
+              </div>
+              <div class="testi-rating">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="testi-quote">
+            "Setelah 3 bulan rutin minum APG setiap pagi, pencernaan saya jauh lebih lancar dan tidak mudah capek lagi. Kolesterol turun dari 245 jadi 180. Rasa jamunya pas, tidak terlalu pahit. Inggih, jamu Bali memang juara!"
+          </div>
+          <div class="testi-result">
+            ✓ Kolesterol turun 65 poin dalam 3 bulan
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testi-header">
+            <div class="testi-avatar" style="background: linear-gradient(135deg, var(--gold-400), var(--gold-700));">PW</div>
+            <div class="testi-info">
+              <div class="testi-name">Pak I Wayan Sudiarta</div>
+              <div class="testi-loc">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Denpasar, Bali · 45 tahun
+              </div>
+              <div class="testi-rating">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="testi-quote">
+            "Sebagai pegawai yang sering kerja shift malam, jam makan saya tidak teratur. Sejak konsumsi APG, perut tidak lagi begah dan berat badan turun 8 kg dalam 4 bulan tanpa diet ekstrem. Recommended banget untuk yang sibuk seperti saya!"
+          </div>
+          <div class="testi-result">
+            ✓ Berat badan turun 8 kg dalam 4 bulan
+          </div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testi-header">
+            <div class="testi-avatar" style="background: linear-gradient(135deg, #2D9B5E, #1F7340);">NK</div>
+            <div class="testi-info">
+              <div class="testi-name">Ni Kadek Pratiwi</div>
+              <div class="testi-loc">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Gianyar, Bali · 34 tahun
+              </div>
+              <div class="testi-rating">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="testi-quote">
+            "Selain manfaat kesehatan yang luar biasa, bisnis APG memberi saya penghasilan tambahan yang stabil. Dalam 6 bulan, saya sudah membangun jaringan 50+ member dan menerima bonus rutin. Mimpi membeli rumah jadi semakin dekat!"
+          </div>
+          <div class="testi-result">
+            ✓ Bonus bisnis Rp 15jt/bulan dalam 6 bulan
+          </div>
+        </div>
+
+        <div style="text-align: center; padding-top: 8px;">
+          <div style="display: inline-flex; align-items: center; gap: 4px; color: var(--gold-700); font-size: 12px; font-weight: 600;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+            4.9 / 5.0 dari 12.500+ pelanggan
           </div>
         </div>
       </div>
@@ -1928,7 +2442,7 @@
           <div class="menu-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
 
-        <div class="menu-item" onclick="showToast('Pusat bantuan')">
+        <div class="menu-item" onclick="openModal('helpModal')">
           <div class="menu-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
@@ -2132,6 +2646,254 @@
   </div>
 </div>
 
+<!-- Member Detail Modal -->
+<div class="modal-backdrop" id="memberDetailModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('memberDetailModal')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div id="memberDetailContent"></div>
+  </div>
+</div>
+
+<!-- Help Center Modal -->
+<div class="modal-backdrop" id="helpModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('helpModal')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-handle"></div>
+    <div style="text-align: center; margin-bottom: 16px;">
+      <div style="font-size: 48px; margin-bottom: 4px;">🙏</div>
+      <div class="modal-title" style="margin-bottom: 4px;">Pusat Bantuan</div>
+      <p style="color: var(--text-muted); font-size: 13px;">Om Swastiastu, ada yang bisa kami bantu?</p>
+    </div>
+
+    <!-- Search -->
+    <div class="form-group">
+      <input type="text" class="form-input" placeholder="🔍 Cari pertanyaan..." oninput="filterFAQ(this.value)">
+    </div>
+
+    <!-- Categories -->
+    <div class="help-category">
+      <div class="help-cat-pill active" onclick="setFAQCategory(this, 'all')">📋 Semua</div>
+      <div class="help-cat-pill" onclick="setFAQCategory(this, 'account')">👤 Akun</div>
+      <div class="help-cat-pill" onclick="setFAQCategory(this, 'product')">📦 Produk</div>
+      <div class="help-cat-pill" onclick="setFAQCategory(this, 'bonus')">💰 Bonus</div>
+      <div class="help-cat-pill" onclick="setFAQCategory(this, 'member')">👥 Member</div>
+      <div class="help-cat-pill" onclick="setFAQCategory(this, 'payment')">💳 Pembayaran</div>
+    </div>
+
+    <div class="detail-section-title">Pertanyaan Sering Diajukan</div>
+
+    <div id="faqList">
+      <div class="faq-item" data-category="account" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Bagaimana cara mendaftar menjadi member APG?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>Untuk mendaftar menjadi member APG, ikuti langkah berikut:</p>
+          <ul>
+            <li>Klik menu <strong>Member</strong> di bottom navigation</li>
+            <li>Pilih tab <strong>Tambah Member</strong></li>
+            <li>Isi formulir dengan ID Sponsor yang valid (wajib diisi)</li>
+            <li>Lengkapi data diri dan pilih paket awal</li>
+            <li>Lakukan pembayaran sesuai paket yang dipilih</li>
+          </ul>
+          <p>Setelah pembayaran terverifikasi, akun member akan otomatis aktif dan dapat login ke aplikasi.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Berapa kali sehari mengonsumsi APG?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>APG dapat dikonsumsi <strong>1-2 sachet per hari</strong> dengan aturan:</p>
+          <ul>
+            <li><strong>Pagi hari:</strong> 30 menit sebelum sarapan (untuk melancarkan pencernaan)</li>
+            <li><strong>Malam hari:</strong> 1-2 jam sebelum tidur (untuk detoksifikasi)</li>
+          </ul>
+          <p>Larutkan 1 sachet ke dalam 200ml air hangat, aduk hingga rata, dan minum selagi hangat. Untuk hasil optimal, konsumsi rutin minimal 30 hari berturut-turut.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="bonus" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Bagaimana sistem bonus binary APG bekerja?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>APG menggunakan sistem <strong>binary tree</strong> dengan beberapa jenis bonus:</p>
+          <ul>
+            <li><strong>Bonus Sponsor:</strong> 10-15% dari setiap rekrutan langsung</li>
+            <li><strong>Bonus Pasangan:</strong> Rp 50.000 - Rp 350.000 per pasangan kiri-kanan</li>
+            <li><strong>Bonus Pangkat:</strong> Bonus tambahan saat naik peringkat</li>
+            <li><strong>Royalty Bulanan:</strong> 1-5% omset jaringan keseluruhan</li>
+          </ul>
+          <p>Bonus dihitung otomatis setiap hari dan dapat di-withdraw setelah mencapai minimum Rp 100.000.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="payment" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Metode pembayaran apa saja yang tersedia?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>Kami menyediakan berbagai metode pembayaran untuk kemudahan Anda:</p>
+          <ul>
+            <li><strong>Transfer Bank:</strong> BCA, Mandiri, BNI, BRI</li>
+            <li><strong>QRIS:</strong> Scan dari semua e-wallet & m-banking</li>
+            <li><strong>E-Wallet:</strong> GoPay, OVO, Dana, ShopeePay</li>
+            <li><strong>Virtual Account:</strong> Otomatis terverifikasi 24 jam</li>
+          </ul>
+          <p>Semua transaksi diproses secara aman dan terenkripsi. Konfirmasi pembayaran otomatis dalam 5-15 menit.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="member" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Apa perbedaan posisi Kaki Kiri dan Kaki Kanan?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>Dalam sistem binary, setiap member memiliki <strong>2 kaki (leg)</strong>:</p>
+          <ul>
+            <li><strong>Kaki Kiri:</strong> Cabang jaringan di sebelah kiri Anda</li>
+            <li><strong>Kaki Kanan:</strong> Cabang jaringan di sebelah kanan Anda</li>
+          </ul>
+          <p>Bonus pasangan dihitung dari <em>pairing</em> antara kaki kiri dan kanan. Untuk memaksimalkan bonus, kembangkan kedua kaki secara seimbang. Jika satu kaki lebih besar, sisa pointnya akan di-carry over ke periode berikutnya.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Apakah APG aman untuk ibu hamil dan menyusui?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>APG mengandung bahan alami yang umumnya aman, namun untuk <strong>ibu hamil dan menyusui</strong>, kami sangat menyarankan untuk:</p>
+          <ul>
+            <li>Konsultasi terlebih dahulu dengan dokter atau bidan</li>
+            <li>Tidak dianjurkan pada trimester pertama kehamilan</li>
+            <li>Mengikuti dosis minimum jika disetujui dokter</li>
+          </ul>
+          <p>Produk ini juga tidak dianjurkan untuk anak di bawah 12 tahun.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="account" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Bagaimana cara mengubah data profil saya?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>Anda dapat mengubah data profil melalui:</p>
+          <ul>
+            <li>Buka menu <strong>Profile</strong> di bottom navigation</li>
+            <li>Klik <strong>Edit Profil</strong></li>
+            <li>Update data yang ingin diubah (foto, alamat, no. HP, dll)</li>
+            <li>Simpan perubahan</li>
+          </ul>
+          <p>Untuk perubahan data penting seperti nama lengkap atau nomor rekening, diperlukan verifikasi tambahan via WhatsApp ke admin support.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="bonus" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Kapan jadwal pencairan (withdraw) bonus?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>Jadwal pencairan bonus APG:</p>
+          <ul>
+            <li><strong>Bonus Harian:</strong> Dapat di-withdraw setiap hari (cut-off jam 16:00 WITA)</li>
+            <li><strong>Bonus Pasangan:</strong> Dihitung harian, ditransfer H+1</li>
+            <li><strong>Royalty Bulanan:</strong> Setiap tanggal 5 bulan berikutnya</li>
+            <li><strong>Minimum withdraw:</strong> Rp 100.000</li>
+            <li><strong>Biaya admin:</strong> Rp 5.000 per transaksi</li>
+          </ul>
+          <p>Withdraw akan diproses dalam 1×24 jam kerja ke rekening yang terdaftar.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-category="product" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <div class="faq-q-icon">Q</div>
+          <div class="faq-q-text">Apakah ada efek samping mengonsumsi APG?</div>
+          <svg class="faq-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <p>APG terbuat dari <strong>100% bahan alami</strong> dan telah tersertifikasi BPOM serta Halal MUI. Pada minggu pertama, beberapa pengguna mungkin mengalami:</p>
+          <ul>
+            <li>BAB lebih sering (efek detoks alami, normal)</li>
+            <li>Sedikit perut kembung sementara</li>
+            <li>Rasa haus meningkat (perbanyak minum air putih)</li>
+          </ul>
+          <p>Reaksi ini disebut <em>healing crisis</em> dan akan hilang dalam 3-7 hari. Jika muncul reaksi alergi, hentikan konsumsi dan konsultasi ke dokter.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider-ornament">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 8 L20 8 L15 12 L17 18 L12 14 L7 18 L9 12 L4 8 L10 8 Z"/></svg>
+    </div>
+
+    <div class="detail-section-title">Masih butuh bantuan? Hubungi kami</div>
+
+    <div class="contact-card" onclick="showToast('Membuka WhatsApp...')">
+      <div class="contact-icon wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C3.9 15 3.5 13.5 3.5 12 3.5 7.3 7.3 3.5 12 3.5S20.5 7.3 20.5 12 16.7 20.2 12 20.2z"/></svg>
+      </div>
+      <div class="contact-info">
+        <div class="contact-name">WhatsApp Support</div>
+        <div class="contact-detail">+62 812-8888-7777 · Online 24/7</div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+
+    <div class="contact-card" onclick="showToast('Email support')">
+      <div class="contact-icon email">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="contact-info">
+        <div class="contact-name">Email Support</div>
+        <div class="contact-detail">support@apgbali.id · Respon 1×24 jam</div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+
+    <div class="contact-card" onclick="showToast('Menghubungi kantor pusat')">
+      <div class="contact-icon phone">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="contact-info">
+        <div class="contact-name">Kantor Pusat Denpasar</div>
+        <div class="contact-detail">(0361) 234-5678 · Senin-Sabtu 09:00-17:00</div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+
+    <div style="background: var(--bg-soft); border-radius: 12px; padding: 12px; margin-top: 12px; text-align: center; font-size: 12px; color: var(--text-soft); border: 1px dashed var(--border-soft);">
+      <strong style="color: var(--gold-700); font-family: 'Cormorant Garamond', serif; font-size: 14px;">Alamat Kantor Pusat</strong><br>
+      Jl. Sunset Road No. 168, Kuta, Badung, Bali 80361<br>
+      <em style="color: var(--text-muted);">"Om Santhi Santhi Santhi Om" 🙏</em>
+    </div>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast">
   <div class="toast-icon">
@@ -2249,7 +3011,7 @@ function renderTree() {
   const canvas = document.getElementById('treeCanvas');
   if (!canvas) return;
 
-  // Collect visible nodes per level
+  // Collect visible nodes per level + parent reference
   const levels = [];
   function collect(node, depth, parent) {
     levels[depth] = levels[depth] || [];
@@ -2261,16 +3023,16 @@ function renderTree() {
   collect(treeData, 0, null);
 
   // Render HTML
-  let html = '';
+  let html = '<svg class="tree-lines" id="treeLines" xmlns="http://www.w3.org/2000/svg"></svg>';
   levels.forEach((levelNodes, depth) => {
     html += `<div class="tree-level" data-level="${depth}">`;
-    levelNodes.forEach(({ node }) => {
+    levelNodes.forEach(({ node, parent }) => {
       const hasChildren = node.children && node.children.length;
       const expanded = expandedNodes.has(node.id);
       const cls = node.root ? 'root' : (depth === 1 ? 'level-1' : '');
       html += `
         <div class="tree-node ${cls} ${hasChildren ? 'has-children' : ''} ${expanded ? 'expanded' : ''}"
-             data-id="${node.id}" onclick="toggleNode('${node.id}', event)">
+             data-id="${node.id}" data-parent="${parent ? parent.id : ''}" onclick="toggleNode('${node.id}', event)">
           <div class="node-avatar">${node.initial}</div>
           <div class="node-name">${node.name}</div>
           <div class="node-id">${node.id}</div>
@@ -2280,7 +3042,53 @@ function renderTree() {
     html += `</div>`;
   });
   canvas.innerHTML = html;
+
+  // Draw connecting lines after layout
+  requestAnimationFrame(() => drawTreeLines());
 }
+
+function drawTreeLines() {
+  const canvas = document.getElementById('treeCanvas');
+  const svg = document.getElementById('treeLines');
+  if (!canvas || !svg) return;
+
+  const canvasRect = canvas.getBoundingClientRect();
+  const width = canvas.scrollWidth;
+  const height = canvas.scrollHeight;
+  svg.setAttribute('width', width);
+  svg.setAttribute('height', height);
+  svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+  let paths = '';
+  const nodes = canvas.querySelectorAll('.tree-node[data-parent]');
+  nodes.forEach(n => {
+    const parentId = n.dataset.parent;
+    if (!parentId) return;
+    const parent = canvas.querySelector(`.tree-node[data-id="${parentId}"]`);
+    if (!parent) return;
+
+    const pRect = parent.getBoundingClientRect();
+    const cRect = n.getBoundingClientRect();
+
+    // Coordinates relative to canvas
+    const x1 = pRect.left - canvasRect.left + pRect.width / 2;
+    const y1 = pRect.top - canvasRect.top + pRect.height;
+    const x2 = cRect.left - canvasRect.left + cRect.width / 2;
+    const y2 = cRect.top - canvasRect.top;
+
+    const midY = y1 + (y2 - y1) / 2;
+    // Smooth curved connector
+    paths += `<path d="M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}" />`;
+  });
+
+  svg.innerHTML = paths;
+}
+
+window.addEventListener('resize', () => {
+  if (document.getElementById('page-member').classList.contains('active')) {
+    drawTreeLines();
+  }
+});
 
 function toggleNode(id, event) {
   if (event) event.stopPropagation();
@@ -2360,7 +3168,7 @@ function renderMemberList() {
   }
 
   tbody.innerHTML = data.map(m => `
-    <tr>
+    <tr class="member-row" onclick="showMemberDetail('${m.id}')">
       <td><strong>${m.id}</strong></td>
       <td>${m.name}</td>
       <td>${m.position === '-' ? '<span style="color:var(--text-muted)">Root</span>' : `<span class="badge-pos ${m.position === 'Kiri' ? 'left' : 'right'}">${m.position}</span>`}</td>
@@ -2423,6 +3231,9 @@ function navigateTo(page) {
   if (page === 'member') {
     renderTree();
     renderMemberList();
+    // Redraw lines after layout settles (tree was hidden before)
+    setTimeout(drawTreeLines, 50);
+    setTimeout(drawTreeLines, 200);
   }
   if (page === 'dashboard') renderBirthdays();
 
@@ -2435,7 +3246,10 @@ function switchTab(group, tab) {
     document.getElementById('member-tree').style.display = tab === 'tree' ? 'block' : 'none';
     document.getElementById('member-list').style.display = tab === 'list' ? 'block' : 'none';
     document.getElementById('member-add').style.display = tab === 'add' ? 'block' : 'none';
-    if (tab === 'tree') renderTree();
+    if (tab === 'tree') {
+      renderTree();
+      setTimeout(drawTreeLines, 50);
+    }
     if (tab === 'list') renderMemberList();
   }
 }
@@ -2555,6 +3369,196 @@ document.querySelectorAll('.modal-backdrop').forEach(m => {
     if (e.target === m) m.classList.remove('active');
   });
 });
+
+/* ============== MEMBER DETAIL ============== */
+function showMemberDetail(id) {
+  const m = memberFlat.find(x => x.id === id);
+  if (!m) return;
+
+  // Compute additional dummy info from member id
+  const seed = parseInt(m.id.split('-')[1]) || 1;
+  const phones = ['+62 812-3456-7890', '+62 813-9876-5432', '+62 821-2345-6789', '+62 819-8765-4321'];
+  const emails = ['member@apgbali.id', 'sehat@apgbali.id', 'wellness@apgbali.id'];
+  const sponsors = ['APG-001', 'APG-002', 'APG-003', 'APG-004'];
+  const packages = ['Silver', 'Gold', 'Platinum'];
+  const ranks = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond'];
+  const banks = ['BCA', 'Mandiri', 'BNI', 'BRI'];
+
+  const phone = phones[seed % phones.length];
+  const email = m.name.toLowerCase().replace(/[^a-z]/g, '') + '@apgbali.id';
+  const sponsor = m.id === 'APG-001' ? '-' : sponsors[seed % sponsors.length];
+  const pkg = packages[seed % packages.length];
+  const rank = ranks[Math.min(m.level, 4)];
+  const downlineCount = Math.max(0, (8 - m.level) * 3 + (seed % 5));
+  const bonus = (downlineCount * 150000 + (seed * 7777)).toLocaleString('id-ID');
+  const bv = downlineCount * 8 + (seed % 30);
+  const bankAcc = `${banks[seed % banks.length]} ${seed}${seed * 7}${seed * 13}`.slice(0, 18);
+  const birth = `19${70 + (seed % 30)}-${String((seed % 12) + 1).padStart(2,'0')}-${String((seed % 28) + 1).padStart(2,'0')}`;
+
+  // Determine sub-network counts from tree
+  let leftCount = 0, rightCount = 0;
+  const treeNode = findNode(treeData, id);
+  if (treeNode && treeNode.children) {
+    treeNode.children.forEach(c => {
+      const count = countDescendants(c);
+      if (c.position === 'Kiri') leftCount = count;
+      if (c.position === 'Kanan') rightCount = count;
+    });
+  }
+
+  const initial = m.name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+
+  document.getElementById('memberDetailContent').innerHTML = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <div class="profile-avatar" style="width: 80px; height: 80px; font-size: 28px; margin-bottom: 10px;">${initial}</div>
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--text);">${m.name}</div>
+      <div style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; background: var(--grad-gold); color: white; border-radius: 20px; font-size: 11px; font-weight: 600; margin-top: 6px;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8z"/></svg>
+        ${rank} Member
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+        <strong>${m.id}</strong> · ${m.status === 'Active' ? '<span style="color:#2D9B5E;">● Aktif</span>' : '<span style="color:var(--rose-600);">○ Pending</span>'}
+      </div>
+    </div>
+
+    <div class="detail-stats">
+      <div class="detail-stat">
+        <div class="detail-stat-val">${downlineCount}</div>
+        <div class="detail-stat-lbl">Downline</div>
+      </div>
+      <div class="detail-stat">
+        <div class="detail-stat-val">${bv}</div>
+        <div class="detail-stat-lbl">Poin BV</div>
+      </div>
+      <div class="detail-stat">
+        <div class="detail-stat-val" style="font-size: 16px; padding-top: 4px;">Rp ${(bonus.length > 7 ? bonus.slice(0, -4) + 'k' : bonus)}</div>
+        <div class="detail-stat-lbl">Total Bonus</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">📋 Data Diri</div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">ID Member</div>
+          <div class="detail-value">${m.id}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Sponsor</div>
+          <div class="detail-value">${sponsor}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Tgl Lahir</div>
+          <div class="detail-value">${formatDate(birth)}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Bergabung</div>
+          <div class="detail-value">${formatDate(m.join)}</div>
+        </div>
+        <div class="detail-item full">
+          <div class="detail-label">No. Telepon / WA</div>
+          <div class="detail-value">${phone}</div>
+        </div>
+        <div class="detail-item full">
+          <div class="detail-label">Email</div>
+          <div class="detail-value">${email}</div>
+        </div>
+        <div class="detail-item full">
+          <div class="detail-label">Alamat</div>
+          <div class="detail-value">Jl. Bali Lestari No. ${seed * 3}, ${m.location}, Bali ${80100 + seed}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">🌳 Jaringan & Posisi</div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Posisi</div>
+          <div class="detail-value">${m.position === '-' ? 'Root' : `<span class="badge-pos ${m.position === 'Kiri' ? 'left' : 'right'}">Kaki ${m.position}</span>`}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Level</div>
+          <div class="detail-value">Level ${m.level}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Kaki Kiri</div>
+          <div class="detail-value">${leftCount} member</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Kaki Kanan</div>
+          <div class="detail-value">${rightCount} member</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">💼 Bisnis & Pembayaran</div>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-label">Paket Aktif</div>
+          <div class="detail-value">${pkg}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Peringkat</div>
+          <div class="detail-value">${rank}</div>
+        </div>
+        <div class="detail-item full">
+          <div class="detail-label">Rekening Bank</div>
+          <div class="detail-value">${bankAcc} a.n. ${m.name}</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button class="btn btn-ghost" style="flex: 1;" onclick="closeModal('memberDetailModal')">Tutup</button>
+      <button class="btn btn-rose" style="flex: 1;" onclick="closeModal('memberDetailModal'); showToast('Menghubungi ${m.name} via WhatsApp...')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.9-2.1-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/></svg>
+        Hubungi
+      </button>
+      <button class="btn btn-primary" style="flex: 1;" onclick="closeModal('memberDetailModal'); showToast('Edit data ${m.name}')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit
+      </button>
+    </div>
+  `;
+
+  openModal('memberDetailModal');
+}
+
+function countDescendants(node) {
+  let count = 1;
+  if (node.children) node.children.forEach(c => count += countDescendants(c));
+  return count;
+}
+
+/* ============== FAQ ============== */
+function toggleFAQ(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+function setFAQCategory(el, category) {
+  document.querySelectorAll('.help-cat-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.faq-item').forEach(item => {
+    if (category === 'all' || item.dataset.category === category) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+    item.classList.remove('open');
+  });
+}
+
+function filterFAQ(keyword) {
+  const k = keyword.toLowerCase().trim();
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = (!k || text.includes(k)) ? '' : 'none';
+  });
+}
 
 /* ============== TOAST ============== */
 function showToast(msg, icon) {
